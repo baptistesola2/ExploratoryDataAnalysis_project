@@ -1,11 +1,11 @@
-
+#Reading the data
 dataa<- read.table("./household_power_consumption.txt",header = TRUE,sep = ";")
 
 datasplit <- split(dataa,dataa[,1])
 
 datasub <- rbind(datasplit$`1/2/2007`,datasplit$`2/2/2007`)
 
-#Cleaning
+#Cleaning the data
 datasub$Voltage <- as.numeric(as.character(datasub$Voltage))
 datasub$Global_active_power <- as.numeric(as.character(datasub$Global_active_power))
 datasub$Global_reactive_power <- as.numeric(as.character(datasub$Global_reactive_power))
@@ -14,13 +14,14 @@ datasub$Sub_metering_1 <- as.numeric(as.character(datasub$Sub_metering_1))
 datasub$Sub_metering_2 <- as.numeric(as.character(datasub$Sub_metering_2))
 datasub$Sub_metering_3 <- as.numeric(as.character(datasub$Sub_metering_3))
 
+#Drawing plots
 #plot 1
 png(filename = 'plot1.png', width = 480, height = 480)
 hist(datasub$Global_active_power,main = "Global active power", xlab = 'Global active power (kilowatts)',col="red")
 dev.off()
 
 
-# Create Line Chart plot2
+#plot2
 png(filename = 'plot2.png', width = 480, height = 480)
 
 plot(datasub$Global_active_power, type="l", col="black", ylab='Gloabl Active Power (kilowatts)',xlab="", axes = F)
